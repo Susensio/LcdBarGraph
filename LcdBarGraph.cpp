@@ -101,16 +101,22 @@ LcdBarGraph::LcdBarGraph(LiquidCrystal* lcd, byte numCols, byte startX, byte sta
     _startX = startX;
 	_startY = startY;
     // -- creating characters
-#ifndef USE_BUILDIN_FILLED_CHAR
+	
+	createAllChar();
+	
+    // -- setting initial values
+    this->_prevValue = 0; // -- cached value
+    this->_lastFullChars = 0; // -- cached value
+}
+
+void LcdBarGraph::createAllChar(void) {
+	#ifndef USE_BUILDIN_FILLED_CHAR
     _lcd->createChar(0, this->_level0);
-#endif
+	#endif
     _lcd->createChar(1, this->_level1);
     _lcd->createChar(2, this->_level2);
     _lcd->createChar(3, this->_level3);
     _lcd->createChar(4, this->_level4);
-    // -- setting initial values
-    this->_prevValue = 0; // -- cached value
-    this->_lastFullChars = 0; // -- cached value
 }
 
 // -- the draw function
@@ -161,4 +167,9 @@ void LcdBarGraph::drawValue(int value, int maxValue) {
     _lcd->print((int)mod);
     _lcd->write(']');
     */
+	
+}
+
+void LcdBarGraph::forceRedraw(void){
+	_prevValue=0;
 }

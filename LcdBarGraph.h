@@ -52,6 +52,11 @@ public:
      * Draw a bargraph with a value between 0 and maxValue.
      */
     void drawValue(int value, int maxvalue);
+	
+	
+	void forceRedraw(void);
+	void createAllChar(void);
+	
 private:
     LiquidCrystal* _lcd;
     byte _numCols;
